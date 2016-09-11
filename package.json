@@ -1,0 +1,20 @@
+{
+  "name": "bluey",
+  "version": "0.1.0",
+  "description": "A Database Access Layer that provides a model like interface without being an ORM.",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_ENV=test ./node_modules/.bin/mocha --recursive"
+  },
+  "author": "Coen Hyde",
+  "license": "MIT",
+  "devDependencies": {
+    "expect.js": "^0.3.1",
+    "mocha": "^3.0.2"
+  },
+  "dependencies": {
+    "async": "^2.0.1",
+    "lodash": "^4.15.0",
+    "revalidator": "^0.3.1"
+  }
+}
