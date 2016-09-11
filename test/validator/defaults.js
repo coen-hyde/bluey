@@ -77,4 +77,29 @@ describe('Validator:Defaults', function() {
       done();
     });
   });
+
+  it('should apply default with function value', function(done) {
+    var schema = {
+      name: 'test',
+      properties: {
+        key1: {
+          description: 'key1',
+          type: 'string',
+          default: function() {
+            return 'woot'
+          },
+          required: true
+        }
+      }
+    }
+
+    var data = {}
+
+    validator(data, schema, function(err, result, data) {
+      expect(err).to.equal(null);
+      expect(result.valid).to.equal(true);
+      expect(data.key1).to.equal('woot');
+      done();
+    });
+  });
 });
