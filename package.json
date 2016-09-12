@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "async": "^2.0.1",
+    "inflection": "^1.10.0",
     "lodash": "^4.15.0",
     "revalidator": "^0.3.1"
   }
