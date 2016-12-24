@@ -17,6 +17,7 @@
     "inflection": "^1.10.0",
     "knex": "^0.12.6",
     "lodash": "^4.17.0",
+    "mongodb": "^2.2.16",
     "revalidator": "^0.3.1"
   }
 }
