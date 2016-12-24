@@ -13,9 +13,10 @@
     "mocha": "^3.0.2"
   },
   "dependencies": {
-    "async": "^2.0.1",
+    "async": "^2.1.4",
     "inflection": "^1.10.0",
-    "lodash": "^4.15.0",
+    "knex": "^0.12.6",
+    "lodash": "^4.17.0",
     "revalidator": "^0.3.1"
   }
 }
