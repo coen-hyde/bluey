@@ -4,7 +4,7 @@ var expect = require('expect.js');
 var validator = require('../../lib/validator');
 
 describe('Validator:Filter', function() {
-  it('should remove unlisted properties from flat schema', function(done) {
+  it('should remove undefined properties from flat schema', function(done) {
     var schema = {
       name: 'test',
       properties: {
@@ -34,7 +34,7 @@ describe('Validator:Filter', function() {
     });
   });
 
-  it('should apply defaults to nested schema', function(done) {
+  it('should remove undefined properties from nested schema', function(done) {
     var schema = {
       name: 'test',
       properties: {
@@ -57,6 +57,7 @@ describe('Validator:Filter', function() {
     var data = {
       key1: 'value1',
       nested: {
+        key1: 'yo',
         key2: 'hey'
       }
     };
@@ -64,6 +65,7 @@ describe('Validator:Filter', function() {
     validator(data, schema, function(err, result, data) {
       expect(err).to.equal(null);
       expect(result.valid).to.equal(true);
+      expect(data.nested.key1).to.equal('yo');
       expect(data.nested.key2).to.equal(undefined);
       done();
     });
