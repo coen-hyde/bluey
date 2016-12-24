@@ -40,12 +40,15 @@ module.exports = function(model) {
 
   // Add and bind base functions
   _.each(adapter, function(fn, key) {
+    if (!_.isFunction(fn)) return;
     model[key] = fn.bind(model);
   });
 
   // Bind all existing model functions with model
   _.each(fns, function(fnName) {
-    model[fnName] = model[fnName].bind(model);
+    let fn = model[fnName];
+    if (!_.isFunction(fn)) return;
+    model[fnName] = fn.bind(model);
   });
 
   return model;
