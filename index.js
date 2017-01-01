@@ -3,25 +3,6 @@
 var _ = require('lodash');
 var base = require('./lib/base');
 
-function determineAdapter(model) {
-  var adapterName = null;
-
-  if (!model.adapter) {
-    throw Error(`No adapter was set for model "${model.name}"`);
-  }
-
-  // Knex?
-  if (model.adapter['__knex__']) {
-    adapterName = 'knex';
-  }
-
-  if (!adapterName) {
-    throw Error(`Could not determine adapter for model "${model.name}"`);
-  }
-
-  return adapterName;
-}
-
 module.exports = function(model) {
   // Find and cache functions to rebind to the model
   var fns = _.filter(_.map(model, function(fn, key) {
@@ -30,8 +11,7 @@ module.exports = function(model) {
     return key;
   });
 
-  var adapterName = determineAdapter(model);
-  var adapter = require(`./lib/adapters/${adapterName}`);
+  var adapter = require(`./lib/adapters/${model.type}`);
 
   // Add and bind base functions
   _.each(base, function(fn, key) {
@@ -39,9 +19,13 @@ module.exports = function(model) {
   });
 
   // Add and bind base functions
-  _.each(adapter, function(fn, key) {
-    if (!_.isFunction(fn)) return;
-    model[key] = fn.bind(model);
+  _.each(adapter, function(attribute, key) {
+    if (_.isFunction(attribute)) {
+      model[key] = attribute.bind(model);
+    }
+    else {
+      model[key] = attribute;
+    }
   });
 
   // Bind all existing model functions with model
