@@ -1,6 +1,6 @@
 {
   "name": "bluey",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "A Database Access Layer that provides a model like interface without being an ORM.",
   "main": "index.js",
   "scripts": {
